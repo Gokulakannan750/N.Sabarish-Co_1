@@ -1,0 +1,13 @@
+# Local dev tooling (Claude Code preview server config)
+.claude/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Temp/scratch
+_*.py
+__pycache__/
+*.pyc
