@@ -214,6 +214,24 @@ h4 {
   background: var(--amber-500);
   color: var(--navy-900);
   box-shadow: 0 12px 28px rgba(233, 162, 59, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.btn--primary:hover::after {
+  left: 150%;
 }
 
 .btn--primary:hover {
@@ -225,6 +243,24 @@ h4 {
 .btn--dark {
   background: var(--navy-900);
   color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--dark::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.btn--dark:hover::after {
+  left: 150%;
 }
 
 .btn--dark:hover {
@@ -236,6 +272,24 @@ h4 {
 .btn--ghost {
   border: 1.5px solid rgba(255, 255, 255, 0.35);
   color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--ghost::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.btn--ghost:hover::after {
+  left: 150%;
 }
 
 .btn--ghost:hover {
@@ -246,6 +300,24 @@ h4 {
 .btn--outline {
   border: 1.5px solid var(--slate-200);
   color: var(--navy-900);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--outline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.08) 50%, rgba(15, 23, 42, 0) 100%);
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.btn--outline:hover::after {
+  left: 150%;
 }
 
 .btn--outline:hover {
@@ -304,6 +376,11 @@ h4 {
   border-radius: 10px;
   padding: 5px 11px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+  transition: transform 0.4s var(--ease);
+}
+
+.brand:hover .brand__logo {
+  transform: scale(1.06) rotate(-2deg);
 }
 
 .header.scrolled .brand__logo {
@@ -645,11 +722,67 @@ h4 {
   color: rgba(255, 255, 255, 0.45);
   font-size: 1.05rem;
   letter-spacing: 0.04em;
-  transition: color 0.3s;
+  display: inline-block;
+  transition: color 0.3s, transform 0.4s var(--ease);
 }
 
 .trustbar span:hover {
   color: var(--amber-400);
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ---------- Clients marquee (auto-scrolling loop) ---------- */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+.marquee__item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  padding-right: 38px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--slate-400);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.marquee__item::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber-500);
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+.marquee__item:hover {
+  color: var(--navy-900);
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
 }
 
 /* ---------- Feature / About split ---------- */
@@ -730,6 +863,11 @@ h4 {
   display: flex;
   gap: 14px;
   align-items: flex-start;
+  transition: transform 0.3s var(--ease);
+}
+
+.check-list li:hover {
+  transform: translateX(6px);
 }
 
 .check-list .ic {
@@ -741,12 +879,23 @@ h4 {
   display: grid;
   place-items: center;
   margin-top: 2px;
+  transition: transform 0.4s var(--ease), background 0.4s var(--ease);
+}
+
+.check-list li:hover .ic {
+  transform: scale(1.15) rotate(10deg);
+  background: var(--amber-500);
 }
 
 .check-list .ic svg {
   width: 14px;
   height: 14px;
   color: var(--amber-600);
+  transition: color 0.4s var(--ease);
+}
+
+.check-list li:hover .ic svg {
+  color: var(--navy-900);
 }
 
 .check-list b {
@@ -797,7 +946,7 @@ h4 {
   background: var(--amber-500);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s var(--ease);
+  transition: transform 0.8s var(--ease);
 }
 
 .service-card[data-href] {
@@ -836,8 +985,14 @@ h4 {
   transition: color 0.4s;
 }
 
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 .service-card:hover .service-card__icon svg {
   color: var(--navy-900);
+  animation: icon-bounce 1.2s ease-in-out infinite;
 }
 
 .service-card h3 {
@@ -922,11 +1077,13 @@ h4 {
   font-size: 3.2rem;
   color: var(--slate-200);
   line-height: 1;
-  transition: color 0.3s;
+  display: inline-block;
+  transition: color 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
 .process-step:hover .process-step__num {
   color: var(--amber-500);
+  transform: translateY(-6px) scale(1.05);
 }
 
 .process-step h3 {
@@ -1208,6 +1365,12 @@ h4 {
   height: 100%;
   display: flex;
   flex-direction: column;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
 }
 
 .testimonial-card .stars {
@@ -1242,6 +1405,12 @@ h4 {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.1rem;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.testimonial-card:hover .avatar {
+  transform: scale(1.1) rotate(-8deg);
+  box-shadow: 0 4px 12px rgba(10, 22, 38, 0.15);
 }
 
 .testimonial-card .name {
@@ -1256,12 +1425,20 @@ h4 {
 }
 
 /* ---------- CTA Band ---------- */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .cta-band {
   position: relative;
   color: var(--white);
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-700), var(--navy-900), var(--navy-600));
+  background-size: 300% 300%;
+  animation: gradient-shift 12s ease infinite;
   border-radius: var(--radius-lg);
   padding: 72px 40px;
 }
@@ -1463,9 +1640,26 @@ h4 {
   align-items: start;
 }
 
+.contact-intro {
+  max-width: 660px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
 .contact-info {
   display: grid;
   gap: 22px;
+}
+
+.contact-info--row {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.contact-info--row .contact-info__item {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
 }
 
 .contact-info__item {
@@ -1705,11 +1899,13 @@ h4 {
   transition:
     opacity 0.8s var(--ease),
     transform 0.8s var(--ease);
+  will-change: opacity, transform;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 .reveal[data-delay="1"] {
@@ -1722,6 +1918,116 @@ h4 {
 
 .reveal[data-delay="3"] {
   transition-delay: 0.3s;
+}
+
+/* ---------- Entrance animations ---------- */
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hero (homepage) — staggered entrance on load */
+.hero__badge,
+.hero h1,
+.hero p,
+.hero__actions,
+.hero__stats {
+  opacity: 0;
+  animation: intro-up 0.9s var(--ease) forwards;
+}
+
+.hero__badge {
+  animation-delay: 0.15s;
+}
+.hero h1 {
+  animation-delay: 0.3s;
+}
+.hero p {
+  animation-delay: 0.45s;
+}
+.hero__actions {
+  animation-delay: 0.6s;
+}
+.hero__stats {
+  animation-delay: 0.75s;
+}
+
+/* Inner-page banners — lighter staggered entrance */
+.banner h1,
+.banner p,
+.banner .crumbs {
+  opacity: 0;
+  animation: intro-up 0.8s var(--ease) forwards;
+}
+
+.banner h1 {
+  animation-delay: 0.1s;
+}
+.banner p {
+  animation-delay: 0.25s;
+}
+.banner .crumbs {
+  animation-delay: 0.4s;
+}
+
+/* Scroll hint fades out once the hero is scrolled past */
+.scroll-hint {
+  transition: opacity 0.4s ease;
+}
+.scroll-hint.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Counter "pop" when the number finishes counting */
+@keyframes count-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.13);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+[data-count].count-done {
+  display: inline-block;
+  animation: count-pop 0.5s var(--ease);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__badge,
+  .hero h1,
+  .hero p,
+  .hero__actions,
+  .hero__stats,
+  .banner h1,
+  .banner p,
+  .banner .crumbs {
+    opacity: 1;
+  }
 }
 
 /* Back to top */
@@ -1764,7 +2070,6 @@ h4 {
    Responsive
    ================================================================= */
 @media (max-width: 992px) {
-
   .split,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -1824,6 +2129,32 @@ h4 {
   .nav__links a {
     color: var(--white);
     font-size: 1.1rem;
+    opacity: 0;
+    transform: translateX(24px);
+    transition:
+      opacity 0.35s var(--ease),
+      transform 0.35s var(--ease);
+  }
+
+  .nav__links.open a {
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav__links.open a:nth-child(1) {
+    transition-delay: 0.12s;
+  }
+  .nav__links.open a:nth-child(2) {
+    transition-delay: 0.18s;
+  }
+  .nav__links.open a:nth-child(3) {
+    transition-delay: 0.24s;
+  }
+  .nav__links.open a:nth-child(4) {
+    transition-delay: 0.3s;
+  }
+  .nav__links.open a:nth-child(5) {
+    transition-delay: 0.36s;
   }
 
   .header.scrolled .nav__links a {

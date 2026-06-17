@@ -4,12 +4,16 @@
 (function () {
   "use strict";
 
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   /* ---- Sticky header ---- */
   const header = document.querySelector(".header");
+  const scrollHint = document.querySelector(".scroll-hint");
   const onScroll = () => {
     if (header) header.classList.toggle("scrolled", window.scrollY > 40);
     const top = document.querySelector(".to-top");
     if (top) top.classList.toggle("show", window.scrollY > 600);
+    if (scrollHint) scrollHint.classList.toggle("hide", window.scrollY > 80);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
@@ -37,8 +41,15 @@
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            io.unobserve(e.target);
+            const el = e.target;
+            /* Auto-stagger reveal siblings that aren't manually delayed */
+            if (!prefersReduced && !el.hasAttribute("data-delay") && el.parentElement) {
+              const sibs = Array.from(el.parentElement.children).filter((c) => c.classList.contains("reveal"));
+              const idx = sibs.indexOf(el);
+              if (idx > 0) el.style.transitionDelay = idx * 0.08 + "s";
+            }
+            el.classList.add("visible");
+            io.unobserve(el);
           }
         });
       },
@@ -54,6 +65,10 @@
   const animateCount = (el) => {
     const target = parseFloat(el.dataset.count);
     const suffix = el.dataset.suffix || "";
+    if (prefersReduced) {
+      el.textContent = (target % 1 === 0 ? target : target.toFixed(1)) + suffix;
+      return;
+    }
     const dur = 1600;
     const start = performance.now();
     const step = (now) => {
@@ -62,6 +77,7 @@
       const val = target * eased;
       el.textContent = (target % 1 === 0 ? Math.round(val) : val.toFixed(1)) + suffix;
       if (p < 1) requestAnimationFrame(step);
+      else el.classList.add("count-done");
     };
     requestAnimationFrame(step);
   };
@@ -160,6 +176,11 @@
     );
 
     show(0);
+  });
+
+  /* ---- Clients marquee (duplicate items for a seamless loop) ---- */
+  document.querySelectorAll(".marquee__track").forEach((track) => {
+    Array.from(track.children).forEach((node) => track.appendChild(node.cloneNode(true)));
   });
 
   /* ---- FAQ accordion ---- */
