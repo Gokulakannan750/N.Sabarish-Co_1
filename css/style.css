@@ -771,6 +771,20 @@ h4 {
 .marquee__item:hover {
   color: var(--navy-900);
 }
+.marquee__logo {
+  height: 130px;
+  width: auto;
+  max-width: 320px;
+  object-fit: contain;
+  transition: transform 0.3s var(--ease);
+}
+.marquee__item:hover .marquee__logo {
+  transform: translateY(-4px) scale(1.03);
+}
+/* Show the text label only when the logo image is absent (missing/failed) */
+.marquee__logo + .marquee__label {
+  display: none;
+}
 @keyframes marquee-scroll {
   from {
     transform: translateX(0);
