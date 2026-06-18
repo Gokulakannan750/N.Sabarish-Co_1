@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=12" />
+  <link rel="stylesheet" href="css/style.css?v=13" />
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="canonical" href="https://www.your-domain.com/" />
   <meta property="og:type" content="website" />
@@ -98,7 +98,14 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="images/about-construction.jpg">
+      <source src="images/hero-drone.mp4" type="video/mp4" />
+    </video>
     <div class="container hero__inner">
+      <div class="hero__captions" aria-hidden="true">
+        <span class="hero__caption">Quality civil construction since 2002.</span>
+        <span class="hero__caption">Schools, hospitals, factories &amp; public works.</span>
+      </div>
       <span class="hero__badge">🏗️ Quality construction since 2002 — <b>Erode, Tamil Nadu</b></span>
       <h1>Building Excellence,<br /><span class="accent">Brick by Brick.</span></h1>
       <p>
@@ -633,7 +640,7 @@
         stroke-linejoin="round" />
     </svg></a>
 
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 
 </html>

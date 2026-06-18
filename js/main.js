@@ -6,6 +6,48 @@
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- Cinematic hero video + timed captions ---- */
+  const heroEl = document.querySelector(".hero");
+  const heroVideo = document.querySelector(".hero__video");
+  if (heroEl && heroVideo) {
+    const captions = heroEl.querySelectorAll(".hero__caption");
+    let revealed = false;
+    const revealContent = () => {
+      if (revealed) return;
+      revealed = true;
+      captions.forEach((c) => c.classList.remove("is-active"));
+      heroEl.classList.add("content-in");
+    };
+
+    if (prefersReduced) {
+      /* No motion: keep content visible, hold the video on its first frame. */
+      heroVideo.removeAttribute("autoplay");
+      heroVideo.addEventListener("loadeddata", () => heroVideo.pause());
+    } else {
+      heroEl.classList.add("cinematic");
+      const scenes = [
+        [0.4, 3.3],
+        [3.3, 5.7],
+      ]; // [start, end] seconds for each caption
+      const REVEAL_AT = 5.5;
+      heroVideo.addEventListener("timeupdate", () => {
+        if (revealed) return;
+        const t = heroVideo.currentTime;
+        let active = -1;
+        scenes.forEach((s, i) => {
+          if (t >= s[0] && t < s[1]) active = i;
+        });
+        captions.forEach((c, i) => c.classList.toggle("is-active", i === active));
+        if (t >= REVEAL_AT) revealContent();
+      });
+      /* Fallbacks: if autoplay is blocked or the file can't load, show content anyway. */
+      const attempt = heroVideo.play();
+      if (attempt && attempt.catch) attempt.catch(revealContent);
+      heroVideo.addEventListener("error", revealContent);
+      setTimeout(revealContent, 9000);
+    }
+  }
+
   /* ---- Sticky header ---- */
   const header = document.querySelector(".header");
   const scrollHint = document.querySelector(".scroll-hint");
