@@ -368,15 +368,17 @@ h4 {
 }
 
 .brand__logo {
-  height: 44px;
+  height: 46px;
   width: auto;
   display: block;
   flex-shrink: 0;
   background: #fff;
-  border-radius: 10px;
-  padding: 5px 11px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
-  transition: transform 0.4s var(--ease);
+  border-radius: 13px;
+  padding: 3px 7px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
 }
 
 .brand:hover .brand__logo {
@@ -819,6 +821,35 @@ h4 {
   object-fit: cover;
 }
 
+/* Frame clips the slow zoom to the rounded corners */
+.split__frame {
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.split__frame img {
+  border-radius: 0;
+  box-shadow: none;
+  animation: ken-burns 22s ease-in-out infinite alternate;
+}
+
+.split__media:hover .split__frame img {
+  transform: scale(1.1);
+  transition: transform 0.6s var(--ease);
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
 .split__media .accent-img {
   position: absolute;
   bottom: -36px;
@@ -827,6 +858,17 @@ h4 {
   border: 6px solid var(--paper);
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .experience-badge {
@@ -2379,8 +2421,8 @@ h4 {
   }
 
   .brand__logo {
-    height: 36px;
-    padding: 4px 9px;
+    height: 38px;
+    padding: 3px 6px;
   }
 
   .footer .brand__logo {
