@@ -6,6 +6,15 @@
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- Auto-update "years since founding" figures every year ---- */
+  const thisYear = new Date().getFullYear();
+  document.querySelectorAll("[data-since]").forEach((el) => {
+    const years = thisYear - parseInt(el.dataset.since, 10);
+    if (!Number.isFinite(years)) return;
+    el.textContent = String(years);
+    if (el.hasAttribute("data-count")) el.dataset.count = String(years);
+  });
+
   /* ---- Cinematic hero video + timed captions ---- */
   const heroEl = document.querySelector(".hero");
   const heroVideo = document.querySelector(".hero__video");

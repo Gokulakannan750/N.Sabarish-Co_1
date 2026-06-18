@@ -607,16 +607,26 @@ h4 {
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   padding-top: 36px;
   margin-top: 60px;
 }
 
+.hero__stat {
+  padding: 0 22px;
+}
+.hero__stat:first-child {
+  padding-left: 0;
+}
+.hero__stat + .hero__stat {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .hero__stat .num {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: var(--white);
   line-height: 1;
 }
@@ -626,9 +636,11 @@ h4 {
 }
 
 .hero__stat .label {
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 8px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 12px;
 }
 
 .scroll-hint {
@@ -1101,11 +1113,16 @@ h4 {
 .stats-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 0;
 }
 
 .stat-block {
   text-align: center;
+  padding: 0 30px;
+}
+
+.stat-block + .stat-block {
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .stat-block .num {
@@ -1118,9 +1135,11 @@ h4 {
 
 .stat-block .label {
   color: var(--slate-200);
-  font-size: 0.95rem;
-  margin-top: 10px;
-  font-weight: 500;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 12px;
+  font-weight: 600;
 }
 
 .bg-paper .stat-block .label {
@@ -1960,8 +1979,13 @@ h4 {
   font-size: 0.88rem;
 }
 
-.footer__bottom a:hover {
+.footer__bottom a {
   color: var(--amber-400);
+  font-weight: 600;
+}
+
+.footer__bottom a:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Scroll reveal ---------- */
@@ -2310,14 +2334,24 @@ h4 {
 
   .hero__stats {
     grid-template-columns: repeat(2, 1fr);
-    gap: 26px;
+    gap: 26px 18px;
     margin-top: 44px;
     padding-top: 28px;
   }
 
   .stats-strip {
     grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
+    gap: 30px 18px;
+  }
+
+  /* No dividers/horizontal padding when stats wrap to a 2-column grid */
+  .hero__stat,
+  .stat-block {
+    padding: 0;
+  }
+  .hero__stat + .hero__stat,
+  .stat-block + .stat-block {
+    border-left: none;
   }
 
   .form-row {
