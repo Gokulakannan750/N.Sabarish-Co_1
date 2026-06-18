@@ -903,6 +903,7 @@ h4 {
   position: absolute;
   top: -26px;
   left: -26px;
+  z-index: 4;
   background: var(--amber-500);
   color: var(--navy-900);
   border-radius: var(--radius);
@@ -1967,6 +1968,26 @@ h4 {
   color: var(--amber-500);
   flex-shrink: 0;
   margin-top: 3px;
+}
+
+.footer__contact a {
+  color: inherit;
+  transition: color 0.3s;
+  word-break: break-word;
+}
+
+.footer__contact a:hover {
+  color: var(--amber-400);
+}
+
+/* Contact page email link */
+.contact-info__item a {
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.contact-info__item a:hover {
+  color: var(--amber-600);
 }
 
 .footer__bottom {
