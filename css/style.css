@@ -332,17 +332,17 @@ h4 {
   left: 0;
   right: 0;
   z-index: 100;
-  transition:
-    background 0.4s var(--ease),
-    box-shadow 0.4s var(--ease),
-    padding 0.4s var(--ease);
-  padding: 22px 0;
-}
-
-.header.scrolled {
   background: rgba(250, 248, 245, 0.92);
   backdrop-filter: blur(14px);
   box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow 0.4s var(--ease),
+    padding 0.4s var(--ease);
+  padding: 18px 0;
+}
+
+.header.scrolled {
+  box-shadow: var(--shadow-md);
   padding: 14px 0;
 }
 
@@ -359,12 +359,8 @@ h4 {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.25rem;
-  color: var(--white);
-  letter-spacing: -0.03em;
-}
-
-.header.scrolled .brand {
   color: var(--navy-900);
+  letter-spacing: -0.03em;
 }
 
 .brand__logo {
@@ -372,13 +368,9 @@ h4 {
   width: auto;
   display: block;
   flex-shrink: 0;
-  background: #fff;
-  border-radius: 13px;
-  padding: 3px 7px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition:
-    transform 0.4s var(--ease),
-    box-shadow 0.4s var(--ease);
+  background: transparent;
+  box-shadow: none;
+  transition: transform 0.4s var(--ease);
 }
 
 .brand:hover .brand__logo {
@@ -437,7 +429,7 @@ h4 {
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--slate-700);
   position: relative;
   padding: 4px 0;
   transition: color 0.25s;
@@ -507,7 +499,7 @@ h4 {
 
 .nav__toggle span {
   height: 2.5px;
-  background: var(--white);
+  background: var(--navy-900);
   border-radius: 2px;
   transition: 0.3s;
 }
@@ -2337,7 +2329,7 @@ h4 {
     transform: translateY(-7.5px) rotate(-45deg);
   }
 
-  .header.scrolled .nav__toggle.open span {
+  .nav__toggle.open span {
     background: var(--white);
   }
 
@@ -2540,5 +2532,60 @@ h4 {
 
   .footer .brand__logo {
     height: 42px;
+  }
+}
+
+/* ---------- Print / PDF export ---------- */
+@media print {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Reveal everything that is normally animated in on scroll */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero__badge,
+  .hero h1,
+  .hero p,
+  .hero__actions,
+  .hero__stats,
+  .banner h1,
+  .banner p,
+  .banner .crumbs {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  /* Let the header flow with the document instead of overlapping each page */
+  .header {
+    position: static !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Drop interactive-only / decorative bits */
+  .hero__caption,
+  .scroll-hint,
+  .to-top {
+    display: none !important;
+  }
+
+  /* Shrink the full-screen hero so it doesn't waste a page */
+  .hero {
+    min-height: auto !important;
+    padding: 48px 0 !important;
+  }
+
+  /* Avoid splitting cards across pages */
+  .service-card,
+  .project-card,
+  .stat-block,
+  .team-card,
+  .acc-item {
+    break-inside: avoid;
   }
 }
