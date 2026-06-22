@@ -225,7 +225,7 @@ h4 {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
   transform: skewX(-20deg);
   transition: all 0.6s ease;
 }
@@ -254,7 +254,7 @@ h4 {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
   transform: skewX(-20deg);
   transition: all 0.6s ease;
 }
@@ -332,18 +332,18 @@ h4 {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(250, 248, 245, 0.92);
+  background: #FAF8F5;
   backdrop-filter: blur(14px);
   box-shadow: var(--shadow-sm);
   transition:
     box-shadow 0.4s var(--ease),
     padding 0.4s var(--ease);
-  padding: 18px 0;
+  padding: 6px 0;
 }
 
 .header.scrolled {
   box-shadow: var(--shadow-md);
-  padding: 14px 0;
+  padding: 4px 0;
 }
 
 .nav {
@@ -355,31 +355,27 @@ h4 {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   color: var(--navy-900);
   letter-spacing: -0.03em;
 }
 
 .brand__logo {
-  height: 46px;
+  height: 60px;
   width: auto;
   display: block;
   flex-shrink: 0;
   background: transparent;
   box-shadow: none;
+  border: none;
   transition: transform 0.4s var(--ease);
 }
 
 .brand:hover .brand__logo {
   transform: scale(1.06) rotate(-2deg);
-}
-
-.header.scrolled .brand__logo {
-  box-shadow: none;
-  border: 1px solid var(--slate-200);
 }
 
 .footer .brand__logo {
@@ -388,7 +384,7 @@ h4 {
 
 .brand__name {
   font-family: var(--font-display);
-  font-size: 1.18rem;
+  font-size: 1.5rem;
   line-height: 1.1;
   white-space: nowrap;
 }
@@ -396,6 +392,24 @@ h4 {
 .brand .brand__name {
   font-weight: 800;
   opacity: 1;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.04;
+}
+
+.brand__tagline {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-600);
+  margin-top: 3px;
+  white-space: nowrap;
 }
 
 .brand__mark {
@@ -416,7 +430,7 @@ h4 {
 
 .brand span {
   font-weight: 400;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .nav__links {
@@ -608,10 +622,12 @@ h4 {
 .hero__stat {
   padding: 0 22px;
 }
+
 .hero__stat:first-child {
   padding-left: 0;
 }
-.hero__stat + .hero__stat {
+
+.hero__stat+.hero__stat {
   border-left: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -760,14 +776,17 @@ h4 {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
 }
+
 .marquee__track {
   display: flex;
   width: max-content;
   animation: marquee-scroll 40s linear infinite;
 }
+
 .marquee:hover .marquee__track {
   animation-play-state: paused;
 }
+
 .marquee__item {
   flex: 0 0 auto;
   display: flex;
@@ -781,6 +800,7 @@ h4 {
   white-space: nowrap;
   transition: color 0.3s;
 }
+
 .marquee__item::after {
   content: "";
   width: 6px;
@@ -790,9 +810,11 @@ h4 {
   opacity: 0.55;
   flex-shrink: 0;
 }
+
 .marquee__item:hover {
   color: var(--navy-900);
 }
+
 .marquee__logo {
   height: 130px;
   width: auto;
@@ -800,21 +822,26 @@ h4 {
   object-fit: contain;
   transition: transform 0.3s var(--ease);
 }
+
 .marquee__item:hover .marquee__logo {
   transform: translateY(-4px) scale(1.03);
 }
+
 /* Show the text label only when the logo image is absent (missing/failed) */
-.marquee__logo + .marquee__label {
+.marquee__logo+.marquee__label {
   display: none;
 }
+
 @keyframes marquee-scroll {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .marquee__track {
     animation: none;
@@ -865,6 +892,7 @@ h4 {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.08);
   }
@@ -882,10 +910,12 @@ h4 {
 }
 
 @keyframes float-soft {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-12px);
   }
@@ -1063,8 +1093,15 @@ h4 {
 }
 
 @keyframes icon-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 .service-card:hover .service-card__icon svg {
@@ -1114,7 +1151,7 @@ h4 {
   padding: 0 30px;
 }
 
-.stat-block + .stat-block {
+.stat-block+.stat-block {
   border-left: 1px solid rgba(255, 255, 255, 0.16);
 }
 
@@ -1510,9 +1547,17 @@ h4 {
 
 /* ---------- CTA Band ---------- */
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .cta-band {
@@ -1892,6 +1937,27 @@ h4 {
   margin-bottom: 20px;
 }
 
+.footer__brand {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.footer__brand-tag {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-400);
+  margin-top: 5px;
+  margin-bottom: 16px;
+}
+
 .footer__about p {
   font-size: 0.95rem;
   margin-bottom: 22px;
@@ -2035,6 +2101,7 @@ h4 {
     opacity: 0;
     transform: translateY(28px);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -2062,15 +2129,19 @@ h4 {
 .hero.cinematic.content-in .hero__badge {
   animation-delay: 0.05s;
 }
+
 .hero.cinematic.content-in h1 {
   animation-delay: 0.2s;
 }
+
 .hero.cinematic.content-in p {
   animation-delay: 0.35s;
 }
+
 .hero.cinematic.content-in .hero__actions {
   animation-delay: 0.5s;
 }
+
 .hero.cinematic.content-in .hero__stats {
   animation-delay: 0.65s;
 }
@@ -2120,9 +2191,11 @@ h4 {
 .banner h1 {
   animation-delay: 0.1s;
 }
+
 .banner p {
   animation-delay: 0.25s;
 }
+
 .banner .crumbs {
   animation-delay: 0.4s;
 }
@@ -2131,6 +2204,7 @@ h4 {
 .scroll-hint {
   transition: opacity 0.4s ease;
 }
+
 .scroll-hint.hide {
   opacity: 0;
   pointer-events: none;
@@ -2141,13 +2215,16 @@ h4 {
   0% {
     transform: scale(1);
   }
+
   45% {
     transform: scale(1.13);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 [data-count].count-done {
   display: inline-block;
   animation: count-pop 0.5s var(--ease);
@@ -2155,6 +2232,7 @@ h4 {
 
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -2221,6 +2299,7 @@ h4 {
    Responsive
    ================================================================= */
 @media (max-width: 992px) {
+
   .split,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -2295,15 +2374,19 @@ h4 {
   .nav__links.open a:nth-child(1) {
     transition-delay: 0.12s;
   }
+
   .nav__links.open a:nth-child(2) {
     transition-delay: 0.18s;
   }
+
   .nav__links.open a:nth-child(3) {
     transition-delay: 0.24s;
   }
+
   .nav__links.open a:nth-child(4) {
     transition-delay: 0.3s;
   }
+
   .nav__links.open a:nth-child(5) {
     transition-delay: 0.36s;
   }
@@ -2362,8 +2445,9 @@ h4 {
   .stat-block {
     padding: 0;
   }
-  .hero__stat + .hero__stat,
-  .stat-block + .stat-block {
+
+  .hero__stat+.hero__stat,
+  .stat-block+.stat-block {
     border-left: none;
   }
 
@@ -2526,8 +2610,7 @@ h4 {
   }
 
   .brand__logo {
-    height: 38px;
-    padding: 3px 6px;
+    height: 64px;
   }
 
   .footer .brand__logo {
@@ -2537,6 +2620,7 @@ h4 {
 
 /* ---------- Print / PDF export ---------- */
 @media print {
+
   *,
   *::before,
   *::after {
@@ -2549,6 +2633,7 @@ h4 {
     opacity: 1 !important;
     transform: none !important;
   }
+
   .hero__badge,
   .hero h1,
   .hero p,
